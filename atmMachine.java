@@ -54,9 +54,6 @@ void WithDraw(double amount)throws Throwable{
  } 
    
 }
-
-
-
 public class atmMachine{
     public static void main(String arg[])throws Throwable{
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
