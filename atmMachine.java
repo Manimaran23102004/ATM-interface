@@ -1,20 +1,36 @@
 import java.io.*;
 class atm{
-        int p=1234;
+        int p=1234;    //sample password
         String check;
         boolean a=true;
         double currentAmount=5000;
         double dAmount=0;
         double bal=0;
+        String rec;
+
+    void Receipt(){
+        System.out.println("Receipt Print !! Take it...");
+    }
+
     void checkBalance()throws Throwable{
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         int Password;
-            System.out.println("enter password : ");
+       
+       
+            System.out.println("Enter password : ");
             Password=Integer.parseInt(in.readLine());
             bal = currentAmount + dAmount;
 
         if(Password == p){
             System.out.println("Your Balance Is : "+bal);
+            System.out.println("You want to print Receipt (Yes) or (No)");
+            rec=in.readLine().toLowerCase();
+             if(rec.equals("yes")){
+                Receipt();
+             }
+             else{
+                 System.out.println("Thank you!!");
+             }
         }
         else{
             System.out.println("Password Incorrect");
@@ -22,34 +38,35 @@ class atm{
     }
  void Deposite(double damount)throws Throwable{
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    this.dAmount=damount;
-    currentAmount+=dAmount;
+    currentAmount+=damount;
     System.out.println("Deposited Successfully");
-    System.out.println("you want to chect balance");
-    check=in.readLine().toLowerCase();
-    if(check!="yes"){
-        checkBalance();
-    }
-    else{
-        System.out.println("Thank you!!..");
-    }
+    System.out.println("You want to print Receipt (Yes) or (No)");
+                rec=in.readLine().toLowerCase();
+                if(rec.equals("yes")){
+                    Receipt();
+                }
+                else{
+                    System.out.println("Thank you!!");
+                }  
+    
 }
 void WithDraw(double amount)throws Throwable{
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    if((amount<currentAmount) && (currentAmount>1000)){
+    if((amount<currentAmount) && (currentAmount>=1000)){
         currentAmount-=amount;
         System.out.println("Your have been WithDraw : "+amount);
+        
+        System.out.println("You want to print Receipt (Yes) or (No)");
+        rec=in.readLine().toLowerCase();
+        if(rec.equals("yes")){
+            Receipt();
+        }
+        else{
+            System.out.println("Thank you!!");
+        }  
     }
     else{
-        System.out.println("the minimum balance must be 1000");
-    }
-    System.out.println("you want to chect balance");
-    check=in.readLine().toLowerCase();
-    if(check!="yes"){
-        checkBalance();
-    }
-    else{
-        System.out.println("Thank you!!..");
+        System.out.println("You have lesser amount of the account balance...");
     }
  } 
    
@@ -71,36 +88,30 @@ public class atmMachine{
         choice=Integer.parseInt(in.readLine());
 
         switch (choice){
+          
             case 1:
                 a.checkBalance();
                 break;           
             case 2:
                 double depAmount;
-                String check;
                 System.out.println("Enter amount");
                 depAmount=Double.parseDouble(in.readLine());
-                a.Deposite(depAmount);           
+                a.Deposite(depAmount);  
+                       
                 break;
             case 3:
                 double amount;
                 System.out.println("Enter amount");
                 amount=Double.parseDouble(in.readLine());
                 a.WithDraw(amount);
-                System.out.println("you want to chect balance");
-                check=in.readLine().toLowerCase();
-                if(check=="yes"){
-                    a.checkBalance();                    
-                }
-                else{
-                    System.out.println("Thank you!!..");
-                    continueLoop=false;    
-                }
+                
                 break;
             case 4:
+            System.out.println("Thanks for using ATM!!");
                 continueLoop=false;
                 break;
             default:
-                System.out.println("enter correct choice");
+                System.out.println("Enter correct choice");
                 break;
         }
     }
